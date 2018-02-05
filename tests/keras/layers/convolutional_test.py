@@ -420,8 +420,6 @@ def test_averagepooling_2d():
                input_shape=(3, 4, 5, 6))
 
 
-@pytest.mark.skipif((K.backend() == 'mxnet'),
-                    reason='MXNet backend does not support conv3d yet.')
 @keras_test
 def test_convolution_3d():
     num_samples = 2
