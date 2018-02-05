@@ -3938,9 +3938,9 @@ def _preprocess_convnd_kernel(kernel, data_format):
     #   2-D: (depth, input_depth, rows, cols)
     #   3-D: (depth, input_depth, kernel_depth, kernel_height, kernel_width)
     #
-    if data_format == 'channels_last' and len(kernel.shape) > 4:
+    if len(kernel.shape) > 4:
         kernel = KerasSymbol(mx.sym.transpose(data=kernel.symbol, axes=(4, 3, 0, 1, 2)))
-    elif data_format == 'channels_last' and len(kernel.shape) > 3:
+    elif len(kernel.shape) > 3:
         kernel = KerasSymbol(mx.sym.transpose(data=kernel.symbol, axes=(3, 2, 0, 1)))
 
     return kernel
