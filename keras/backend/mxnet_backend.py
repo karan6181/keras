@@ -3041,10 +3041,10 @@ def conv3d(x, kernel, strides=(1, 1, 1), padding='valid',
         data_format = image_data_format()
     _validate_data_format(data_format)
 
-    if padding not in {"same", "valid"}:
-        raise ValueError("`padding` should be either `same` or `valid`.")
+    if padding not in {'same', 'valid'}:
+        raise ValueError('`padding` should be either `same` or `valid`.')
 
-    return _convnd(x, kernel, name="conv3d", strides=strides, filter_dilation=dilation_rate,
+    return _convnd(x, kernel, name='conv3d', strides=strides, filter_dilation=dilation_rate,
                    padding_mode=padding, data_format=data_format)
 
 
@@ -3932,11 +3932,11 @@ def _postprocess_convnd_output(x, data_format):
 @keras_mxnet_symbol
 def _preprocess_convnd_kernel(kernel, data_format):
     # Kernel is always provided in TF kernel shape:
-    #   2-D data: (rows, cols, input_depth, depth)
-    #   3-D date: (kernel_depth, kernel_height, kernel_width, input_depth, depth)
+    #   2-D: (rows, cols, input_depth, depth)
+    #   3-D: (kernel_depth, kernel_rows, kernel_cols, input_depth, depth)
     # Convert it to MXNet kernel shape:
     #   2-D: (depth, input_depth, rows, cols)
-    #   3-D: (depth, input_depth, kernel_depth, kernel_height, kernel_width)
+    #   3-D: (depth, input_depth, kernel_depth, kernel_rows, kernel_cols)
     #
     if len(kernel.shape) > 4:
         kernel = KerasSymbol(mx.sym.transpose(data=kernel.symbol, axes=(4, 3, 0, 1, 2)))
