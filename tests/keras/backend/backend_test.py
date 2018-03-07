@@ -555,7 +555,8 @@ class TestBackend(object):
         outputs_list = [[], [], [], [], [], []]
         state_list = [[], [], [], [], [], []]
 
-        # MXNet backend does not support RNN yet
+        # MXNet backend does not support unroll=False in RNN yet. However, the
+        # keyword argument with `unroll=True` passes successfully.
         for k in BACKENDS_WITHOUT_MXNET:
             rnn_fn = rnn_step_fn(k)
             inputs = k.variable(input_val)
