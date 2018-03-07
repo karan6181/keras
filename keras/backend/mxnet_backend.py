@@ -2594,7 +2594,7 @@ def rnn(step_function, inputs, initial_states,
         # with shape `(samples, 1)` (no time dimension)
         masks = list(mx.sym.split(mask.symbol, axis=1,
                                   squeeze_axis=1, num_outputs=dshape[1]))
-        # Reverse the input sequence
+        # Reverse the mask sequence
         if go_backwards:
             masks.reverse()
     else:
