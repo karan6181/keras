@@ -276,14 +276,16 @@ def constant(value, dtype=None, shape=None, name=None):
         np_ndarray.fill(value)
         mx_ndarray = mx.nd.array(np_ndarray)
 
-    # If the Tensor shape is (1, ), then, it is considered to be scalar.
-    # Return the NDArray.
+    # MXNet does not support Scalars. Shape of a Scalar Tensor with MXNet is
+    # (1, ) instead of (). Return is as MXNet NDArray instance as this is
+    # useful in K.eval() function to return as is (1, )
     if shape == (1,):
         return mx_ndarray
-    name = _prepare_name(name, 'constant')
-    const_var = _keras_variable(name=name, dtype=dtype, shape=mx_ndarray.shape)
-    const_var.bind(mx_ndarray)
-    return const_var
+    else:
+        name = _prepare_name(name, 'constant')
+        const_var = _keras_variable(name=name, dtype=dtype, shape=mx_ndarray.shape)
+        const_var.bind(mx_ndarray)
+        return const_var
 
 
 def is_keras_tensor(x):
@@ -676,7 +678,7 @@ def zeros_like(x, dtype=None, name=None):
                [ 0.,  0.,  0.]], dtype=float32)
     ```
     """
-    return KerasSymbol(mx.sym.zeros_like(data=x.symbol))
+    return KerasSymbol(mx.sym.zeros_like(data=x.symbol, name=name))
 
 
 def ones_like(x, dtype=None, name=None):
@@ -2538,7 +2540,7 @@ def rnn(step_function, inputs, initial_states,
         constants: a list of constant values passed at each step.
         unroll: whether to unroll the RNN or to use a symbolic loop
         (`while_loop` or `scan` depending on backend).
-        input_length: not relevant in the TensorFlow and MXNet implementation.
+        input_length: not relevant in the MXNet implementation.
             Must be specified if using unrolling with Theano.
 
     # Returns
@@ -2577,6 +2579,11 @@ def rnn(step_function, inputs, initial_states,
         inputs.reverse()
 
     # Assume learning phase is a placeholder tensor.(F = test, T = train)
+    # Some Keras layers (e.g. Dropout, BatchNormalization) behave differently at
+    #  training time and testing time. You can tell whether a layer uses the
+    # "learning phase" (train/test) by printing layer.uses_learning_phase, a
+    # boolean: True if the layer has a different behavior in training mode and
+    # test mode, False otherwise.
     global uses_learning_phase
     uses_learning_phase = False
 
