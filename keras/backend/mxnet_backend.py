@@ -223,6 +223,10 @@ def variable(value, dtype=None, name=None, constraint=None):
                [ 3.,  4.]])
     ```
     """
+    if constraint:
+        raise NotImplementedError('MXNet backend does not support constraints. '
+                                  'Keyword arguments such as '
+                                  '`kernel_constraint` and `bias_constraint`')
     if dtype is None:
         dtype = floatx()
 
@@ -2832,7 +2836,7 @@ def categorical_crossentropy(target, output, from_logits=False):
                                                                keepdims=True))
 
     # clip to prevent NaN's and Inf's
-    mx_output = mx.sym.clip(mx_output, a_min=epsilon(), a_max=1 - epsilon())
+    mx_output = mx.sym.clip(mx_output, a_min=epsilon(), a_max=1.0 - epsilon())
     # calc
     mx_output = - mx.sym.sum(target.symbol * mx.sym.log(mx_output), axis=axis)
     return KerasSymbol(mx_output)
@@ -3732,6 +3736,8 @@ class KerasSymbol(object):
     def __getitem__(self, in_slice):
         begin = []
         end = []
+        # in_slice should be a tuple or list of slice() constructor
+        # Convert it to a tuple iterator for single dimensional bias Tensors
         if not isinstance(in_slice, (list, tuple)):
             in_slice = (in_slice,)
         for i in in_slice:
