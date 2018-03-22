@@ -224,9 +224,9 @@ def variable(value, dtype=None, name=None, constraint=None):
     ```
     """
     if constraint:
-        raise NotImplementedError('MXNet backend does not support constraints. '
-                                  'Keyword arguments such as '
-                                  '`kernel_constraint` and `bias_constraint`')
+        warnings.warn('MXNet backend does not support constraints. Keyword '
+                      'arguments such as `kernel_constraint` and '
+                      '`bias_constraint`', stacklevel=2)
     if dtype is None:
         dtype = floatx()
 
@@ -4100,7 +4100,7 @@ def _preprocess_convnd_kernel(kernel, data_format):
     return kernel
 
 
-@keras_mxnet_symbol
+# @keras_mxnet_symbol
 def _preprocess_convnd_transpose_output(output_shape, data_format):
     if data_format == 'channels_last':
         output_shape = output_shape[1:-1]
