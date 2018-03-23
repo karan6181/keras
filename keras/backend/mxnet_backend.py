@@ -4100,7 +4100,7 @@ def _preprocess_convnd_kernel(kernel, data_format):
     return kernel
 
 
-# @keras_mxnet_symbol
+@keras_mxnet_symbol
 def _preprocess_convnd_transpose_output(output_shape, data_format):
     if data_format == 'channels_last':
         output_shape = output_shape[1:-1]
