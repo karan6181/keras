@@ -195,7 +195,6 @@ def to_dense(tensor):
     """
     raise NotImplementedError('MXNet Backend: Sparse operations are not supported yet.')
 
-
 def variable(value, dtype=None, name=None, constraint=None):
     """Instantiates a variable and returns it.
 
@@ -2563,11 +2562,27 @@ def rnn(step_function, inputs, initial_states,
         ValueError: if `mask` is provided (not `None`) but states is not provided
             (`len(states)` == 0).
     """
-    if not unroll:
-        raise NotImplementedError('MXNet Backend: unroll=False '
-                                  'is not supported yet in RNN.')
     dtype = inputs.dtype
     dshape = inputs.shape
+
+    if not unroll and dshape[1] is None:
+        warnings.warn('MXNet Backend: Does not support Variable Length '
+                      'input(Samples of different length). Please pad your '
+                      'input to a constant length, provide `input_shape` and '
+                      'set `unroll=True`'
+                      'Ex: new_x_train = keras.preprocessing.sequence.pad_sequences(old_x_train, '
+                      'maxlen=MAX_LEN_OF_INPUT_SAMPLE_TYPE_INT). '
+                      'More Details - https://github.com/deep-learning-tools/keras/wiki/Limitations-and-workaround-of-RNN-layer-using-MXNet-backend”)',
+                      stacklevel=2)
+        raise NotImplementedError('MXNet Backend: unroll=False '
+                                  'is not supported yet in RNN.')
+    if unroll and dshape[1] is not None:
+        warnings.warn('Please set `unroll=True` while calling '
+                      'SimpleRNN/LSTM/GRU layer as you have provided '
+                      '`input_shape`. MXNet backend does not support '
+                      '`unroll=False` or a Variable Length Input',
+                      stacklevel=2)
+
     if len(dshape) < 3:
         raise ValueError('Input tensor should be at least 3-D')
     if not dshape[1]:
