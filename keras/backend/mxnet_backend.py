@@ -4081,6 +4081,15 @@ def _calculate_conv_output_size(input_length, filter_size, padding, stride,
 @keras_mxnet_symbol
 def _preprocess_convnd_input(data_var, data_format):
     if data_format == 'channels_last' and ndim(data_var) > 3:
+        warnings.warn(
+            'Your image data format is `channels_last`. MXNet performs best '
+            'with `channels_first` data format. Please use the API'
+            '`keras.utils.mxnet_image_channels_conversion(x_input)`'
+            'to transform `channels_last` data to `channels_first` format. '
+            'This operation perform only once on a numpy dataset tensor'
+            'e.g: `x_input`: A numpy tensor'
+            '`x_input = keras.utils.mxnet_image_channels_conversion(x_input)`',
+            stacklevel=2)
         axes = list(range(ndim(data_var)))
         axes.insert(1, axes.pop(-1))  # make it channels_first format
         data_var = KerasSymbol(mx.sym.transpose(data=data_var.symbol, axes=axes))
@@ -4090,6 +4099,15 @@ def _preprocess_convnd_input(data_var, data_format):
 @keras_mxnet_symbol
 def _postprocess_convnd_output(x, data_format):
     if data_format == 'channels_last' and ndim(x) > 3:
+        warnings.warn(
+            'Your image data format is `channels_last`. MXNet performs best '
+            'with `channels_first` data format. Please use the API'
+            '`keras.utils.mxnet_image_channels_conversion(x_input)`'
+            'to transform `channels_last` data to `channels_first` format. '
+            'This operation perform only once on a numpy dataset tensor'
+            'e.g: `x_input`: A numpy tensor'
+            '`x_input = keras.utils.mxnet_image_channels_conversion(x_input)`',
+            stacklevel=2)
         idx = list(range(ndim(x)))
         # Convert result back to channels_last format
         idx.append(idx.pop(1))
@@ -4107,6 +4125,15 @@ def _preprocess_convnd_kernel(kernel, data_format):
     #   3-D: (depth, input_depth, kernel_depth, kernel_rows, kernel_cols)
     #
     if data_format == 'channels_last':
+        warnings.warn(
+            'Your image data format is `channels_last`. MXNet performs best '
+            'with `channels_first` data format. Please use the API'
+            '`keras.utils.mxnet_image_channels_conversion(x_input)`'
+            'to transform `channels_last` data to `channels_first` format. '
+            'This operation perform only once on a numpy dataset tensor'
+            'e.g: `x_input`: A numpy tensor'
+            '`x_input = keras.utils.mxnet_image_channels_conversion(x_input)`',
+            stacklevel=2)
         if len(kernel.shape) > 4:
             kernel = KerasSymbol(mx.sym.transpose(data=kernel.symbol, axes=(4, 3, 0, 1, 2)))
         elif len(kernel.shape) > 3:
