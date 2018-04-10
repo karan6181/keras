@@ -84,7 +84,7 @@ def mxnet_image_channels_conversion(np_data):
                 raise ValueError(
                     'Your data is either a textual data of shape '
                     '`(num_sample, step, feature)` or a grey scale image of '
-                    'shape `(num_sample, height, width)`. '
+                    'shape `(num_sample, rows, cols)`. '
                     'Case 1: If your data is time-series or a textual data'
                     '(probably you are using Conv1D), then there is no need of '
                     'channel conversion. MXNet backend internally handles '
