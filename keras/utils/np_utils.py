@@ -57,10 +57,10 @@ def to_channels_first_helper(np_data):
     format to `channels_first` format
 
     # Arguments
-        np_data: image data tensor
+        np_data: A Numpy data tensor
 
     # Returns
-        A image data tensor with channels_first format
+        A Numpy data tensor with `channels_first` format
     """
     if not isinstance(np_data ,np.ndarray):
         raise ValueError('Image data type should be either a Numpy array or a'
