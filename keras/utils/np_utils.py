@@ -112,7 +112,9 @@ def to_channels_first(data):
         A Numpy data tensor or a list of Numpy data tensor with `channels_first`
         format
     """
+    assert data is not None, "A Numpy data should not be None"
     if isinstance(data, list):
+        assert len(data) != 0, "A list of Numpy data should not be empty"
         for i in range(len(data)):
             data[i] = to_channels_first_helper(data[i])
     else:
