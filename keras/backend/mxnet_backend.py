@@ -4177,9 +4177,12 @@ def _convnd(x, kernel, strides, filter_dilation, name=None, padding_mode='valid'
         warnings.warn(
             'MXNet Backend performs best with `channels_first` format. Using '
             '`channels_last` will significantly reduce performance due to the '
-            'Transpose operations. Please use the API'
+            'Transpose operations. '
+            'For performance improvement, please use this API'
             '`keras.utils.to_channels_first(x_input)`'
-            'to transform `channels_last` data to `channels_first` format.'
+            'to transform `channels_last` data to `channels_first` format and '
+            'also please change the `image_data_format` in `keras.json` to '
+            '`channels_first`.'
             'Note: `x_input` is a Numpy tensor or a list of Numpy tensor',
             stacklevel=2)
 

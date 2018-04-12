@@ -4,8 +4,9 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-from .. import backend as K
+from keras import backend as K
 import warnings
+
 
 def to_categorical(y, num_classes=None):
     """Converts a class vector (integers) to binary class matrix.
@@ -72,16 +73,8 @@ def to_channels_first_helper(np_data):
     if data_format == 'channels_first':
         shape = np_data.shape
         if len(shape) == 5:
-            if shape[1] < shape[4]:
-                warnings.warn('Image data tensor format is already '
-                              '`channels_first`', stacklevel=2)
-                return np_data
             np_data = np.transpose(np_data, (0, 4, 1, 2, 3))
         elif len(shape) == 4:
-            if shape[1] < shape[3]:
-                warnings.warn('Image data tensor format is already '
-                              '`channels_first`', stacklevel=2)
-                return np_data
             np_data = np.transpose(np_data, (0, 3, 1, 2))
         elif len(shape) == 3:
             raise ValueError(
@@ -101,8 +94,10 @@ def to_channels_first_helper(np_data):
             raise ValueError('Your input dimension tensor is incorrect.')
     else:
         raise warnings.warn(
-            '`to_channels_first()` method transpose the data from'
-            '`channels_last` format to `channels_first` format.', stacklevel=2)
+            '`to_channels_first()` method transform the data from'
+            '`channels_last` format to `channels_first` format. Please check'
+            'the `image_data_format` and `backend` in `keras.json` file.',
+            stacklevel=2)
     return np_data
 
 
