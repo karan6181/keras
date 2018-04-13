@@ -29,6 +29,7 @@ def test_to_categorical():
         # Get original labels back from one hots
         assert np.all(np.argmax(one_hot, -1).reshape(label.shape) == label)
 
+
 def test_to_channels_first():
     shapes = [
         (10, 32, 32, 3),
