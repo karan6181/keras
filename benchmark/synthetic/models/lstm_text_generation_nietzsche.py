@@ -23,7 +23,6 @@ from keras.layers import Dense, Activation
 from keras.layers import LSTM
 from keras.optimizers import RMSprop
 
-
 if keras.backend.backend() != 'mxnet' or \
         keras.backend.backend() != 'tensorflow':
     raise NotImplementedError(
