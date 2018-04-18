@@ -1,4 +1,4 @@
-"""Benchmark a lstm model
+"""Benchmark a lstm model on Synthetic dataset
 Credit:
 Script modified from TensorFlow Benchmark repo:
 https://github.com/tensorflow/benchmarks/blob/keras-benchmarks/scripts/keras_benchmarks/models/lstm_benchmark.py
@@ -15,10 +15,13 @@ from keras.utils import multi_gpu_model
 from models import timehistory
 from data_generator import generate_text_input_data
 
+if keras.backend.backend() != 'mxnet' or \
+        keras.backend.backend() != 'tensorflow':
+    raise NotImplementedError(
+        'This benchmark script only support MXNet and TensorFlow backend')
+
 if keras.backend.backend() == 'tensorflow':
     import tensorflow as tf
-if keras.backend.backend() == 'cntk':
-    from gpu_mode import cntk_gpu_mode_config, finalize
 
 
 def crossentropy_from_logits(y_true, y_pred):
@@ -86,12 +89,6 @@ class LstmBenchmark:
         else:
             model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
-        # create a distributed trainer for cntk
-        if keras.backend.backend() == "cntk" and gpus > 1:
-            start, end = cntk_gpu_mode_config(model.model, x_train.shape[0])
-            x_train = x_train[start: end]
-            y_train = y_train[start: end]
-
         time_callback = timehistory.TimeHistory()
 
         if use_dataset_tensors:
@@ -109,6 +106,3 @@ class LstmBenchmark:
 
         if keras.backend.backend() == "tensorflow":
             keras.backend.clear_session()
-
-        if keras.backend.backend() == "cntk" and gpus > 1:
-            finalize()

@@ -56,25 +56,19 @@ please refer [here](https://aws.amazon.com/ec2/instance-types/p3/)
 
 We provide benchmark scripts to run on Synthetic(randomly generated), Nietzsche, and WikiText-2 character level Dataset.
 
-### Synthetic Dataset
-
-We used benchmark scripts from [TensorFlow Benchmark](https://github.com/tensorflow/benchmarks/tree/keras-benchmarks/scripts/keras_benchmarks) official repo, and modified slightly for our use case.
-
-Directly run the shell script to launch the benchmark, provide one of the configurations in config.json.
-
-Example Usage:
-
-`sh run_<backend-type>_backend.sh gpu_config`
-
-### Nietzsche Dataset
-
-We have used an official Keras LSTM example scripts [lstm_text_generation.py](https://github.com/keras-team/keras/blob/master/examples/lstm_text_generation.py), and modified slightly for our use case.
-
 Directly run the shell script to launch the benchmark, provide one of the configurations in config.json and whether you want to benchmark inference speed (True or False). 
 
 Example Usage:
 
 `sh run_<backend-type>_backend.sh gpu_config False`
+
+### Synthetic Dataset
+
+We used benchmark scripts from [TensorFlow Benchmark](https://github.com/tensorflow/benchmarks/tree/keras-benchmarks/scripts/keras_benchmarks) official repo, and modified slightly for our use case.
+
+### Nietzsche Dataset
+
+We have used an official Keras LSTM example scripts [lstm_text_generation.py](https://github.com/keras-team/keras/blob/master/examples/lstm_text_generation.py), and modified slightly for our use case.
 
 ### WikiText-2 Dataset
 
@@ -82,11 +76,9 @@ First, download WikiText-2 Dataset from [here](https://s3.amazonaws.com/research
 
 You can find more information about WikiText dataset from this [link](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset).
 
-Please move the downloaded WikiText dataset file to `keras/benchmark/synthetic/models` directory.
+Please move the downloaded WikiText dataset file(`wiki.train.raw`) to `keras/benchmark/synthetic/models` directory.
 
-Example usage:
-
-`sh run_<backend-type>_backend.sh gpu_config False`
+### 
 
 ### RNN Benchmark Results
 

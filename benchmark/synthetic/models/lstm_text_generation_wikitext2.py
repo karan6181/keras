@@ -1,4 +1,4 @@
-'''
+"""Benchmark a lstm model on WikiText2 dataset
 Original Model from https://github.com/keras-team/keras/blob/master/examples/lstm_text_generation.py
 Benchmark for a LSTM model.
 Script template modified from TensorFlow Benchmark repo:
@@ -6,29 +6,33 @@ https://github.com/tensorflow/benchmarks/blob/keras-benchmarks/scripts/keras_ben
 
 Used WikiText-2 character level dataset from
 https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset
-'''
+"""
+
 from __future__ import print_function
 import keras
-from keras.utils import multi_gpu_model
-
-from models import timehistory
-
-from keras.callbacks import LambdaCallback
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.layers import LSTM
-from keras.optimizers import RMSprop
-import numpy as np
 import random
 import sys
 import io
 import re
 import os
+import numpy as np
+
+from models import timehistory
+from keras.utils import multi_gpu_model
+from keras.callbacks import LambdaCallback
+from keras.models import Sequential
+from keras.layers import Dense, Activation
+from keras.layers import LSTM
+from keras.optimizers import RMSprop
+
+
+if keras.backend.backend() != 'mxnet' or \
+        keras.backend.backend() != 'tensorflow':
+    raise NotImplementedError(
+        'This benchmark script only support MXNet and TensorFlow backend')
 
 if keras.backend.backend() == 'tensorflow':
     import tensorflow as tf
-if keras.backend.backend() == 'cntk':
-    from gpu_mode import cntk_gpu_mode_config, finalize
 
 
 def crossentropy_from_logits(y_true, y_pred):
@@ -119,12 +123,6 @@ class LstmBenchmark:
         else:
             model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
-        # create a distributed trainer for cntk
-        if keras.backend.backend() == "cntk" and gpus > 1:
-            start, end = cntk_gpu_mode_config(model.model, x_train.shape[0])
-            x_train = x_train[start: end]
-            y_train = y_train[start: end]
-
         time_callback = timehistory.TimeHistory()
 
         def sample(preds, temperature=1.0):
@@ -185,6 +183,3 @@ class LstmBenchmark:
 
         if keras.backend.backend() == "tensorflow":
             keras.backend.clear_session()
-
-        if keras.backend.backend() == "cntk" and gpus > 1:
-            finalize()
