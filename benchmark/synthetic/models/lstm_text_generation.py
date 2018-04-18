@@ -8,19 +8,16 @@ https://github.com/tensorflow/benchmarks/blob/keras-benchmarks/scripts/keras_ben
 from __future__ import print_function
 import random
 import sys
-import io
-import re
 import keras
 import numpy as np
 
 from keras.utils import multi_gpu_model
-from keras.utils.data_utils import get_file
 from keras.callbacks import LambdaCallback
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.layers import LSTM
 from keras.optimizers import RMSprop
-from models import timehistory
+from models import timehistory, dataset_utils
 
 if keras.backend.backend() != 'mxnet' and \
         keras.backend.backend() != 'tensorflow':
@@ -37,22 +34,19 @@ def crossentropy_from_logits(y_true, y_pred):
 
 class LstmBenchmark:
 
-    def __init__(self):
+    def __init__(self, dataset_name=None):
         self.test_name = "lstm_text_generation_nietzsche"
         self.sample_type = "text"
         self.total_time = 0
         self.batch_size = 128
         self.epochs = 60
+        self.dataset_name = dataset_name
 
     def run_benchmark(self, gpus=0, inference=False, use_dataset_tensors=False):
         print("Running model ", self.test_name)
         keras.backend.set_learning_phase(True)
 
-        path = get_file(
-            'nietzsche.txt',
-            origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
-        with io.open(path, encoding='utf-8') as f:
-            text = f.read().lower()
+        text = dataset_utils.get_dataset(self.dataset_name)
         print('corpus length:', len(text))
 
         chars = sorted(list(set(text)))

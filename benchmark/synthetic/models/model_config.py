@@ -6,8 +6,7 @@ https://github.com/tensorflow/benchmarks/blob/keras-benchmarks/scripts/keras_ben
 from models import resnet50_benchmark
 from models import resnet50_benchmark_tf_keras
 from models import lstm_synthetic
-from models import lstm_text_generation_nietzsche
-from models import lstm_text_generation_wikitext2
+from models import lstm_text_generation
 
 
 def get_model_config(model_name):
@@ -21,7 +20,7 @@ def get_model_config(model_name):
         return lstm_synthetic.LstmBenchmark()
 
     if model_name == 'lstm_nietzsche':
-        return lstm_text_generation_nietzsche.LstmBenchmark()
+        return lstm_text_generation.LstmBenchmark('nietzsche')
 
     if model_name == 'lstm_wikitext2':
-        return lstm_text_generation_wikitext2.LstmBenchmark()
+        return lstm_text_generation.LstmBenchmark('wikitext2')
