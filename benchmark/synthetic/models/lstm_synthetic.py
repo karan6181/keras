@@ -15,7 +15,7 @@ from keras.utils import multi_gpu_model
 from models import timehistory
 from data_generator import generate_text_input_data
 
-if keras.backend.backend() != 'mxnet' or \
+if keras.backend.backend() != 'mxnet' and \
         keras.backend.backend() != 'tensorflow':
     raise NotImplementedError(
         'This benchmark script only support MXNet and TensorFlow backend')

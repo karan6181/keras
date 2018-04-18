@@ -6,14 +6,12 @@ https://github.com/tensorflow/benchmarks/blob/keras-benchmarks/scripts/keras_ben
 """
 
 from __future__ import print_function
-import keras
 import random
 import sys
 import io
 import re
+import keras
 import numpy as np
-
-from models import timehistory
 
 from keras.utils import multi_gpu_model
 from keras.utils.data_utils import get_file
@@ -22,8 +20,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.layers import LSTM
 from keras.optimizers import RMSprop
+from models import timehistory
 
-if keras.backend.backend() != 'mxnet' or \
+if keras.backend.backend() != 'mxnet' and \
         keras.backend.backend() != 'tensorflow':
     raise NotImplementedError(
         'This benchmark script only support MXNet and TensorFlow backend')

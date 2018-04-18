@@ -72,11 +72,9 @@ We have used an official Keras LSTM example scripts [lstm_text_generation.py](ht
 
 ### WikiText-2 Dataset
 
-First, download WikiText-2 Dataset from [here](https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-raw-v1.zip) (This is a WikiText-2 raw character level data).
+We have used an official WikiText-2 character level Dataset from this [link](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset).
 
-You can find more information about WikiText dataset from this [link](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset).
-
-Please move the downloaded WikiText dataset file(`wiki.train.raw`) to `keras/benchmark/synthetic/models` directory.
+The `lstm_text_generation_wikitext2.py` includes a dataset that is hosted on S3 bucket from this [link](https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-raw-v1.zip) (This is a WikiText-2 raw character level data).
 
 ### 
 
