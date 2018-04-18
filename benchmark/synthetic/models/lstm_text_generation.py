@@ -1,4 +1,4 @@
-"""Benchmark a lstm model on Nietzsche dataset
+"""Benchmark a lstm model
 Original Model from https://github.com/keras-team/keras/blob/master/examples/lstm_text_generation.py
 Benchmark for a LSTM model.
 Script template modified from TensorFlow Benchmark repo:
@@ -35,7 +35,7 @@ def crossentropy_from_logits(y_true, y_pred):
 class LstmBenchmark:
 
     def __init__(self, dataset_name=None):
-        self.test_name = "lstm_text_generation_nietzsche"
+        self.test_name = "lstm_text_generation"
         self.sample_type = "text"
         self.total_time = 0
         self.batch_size = 128
