@@ -4,13 +4,16 @@
 
 ### Configuration
 
-| Data Set           | Synthetic(Randomly generated)                                |
-| ------------------ | ------------------------------------------------------------ |
-| Keras Version      | 2.1.5                                                        |
-| TensorFlow Version | 1.7.0                                                        |
-| MXNet Version      | 1.1.0                                                        |
-| Training Method    | [`fit`](https://keras.io/models/model/#fit)                  |
-| Training Scripts   | [lstm_synthetic](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_synthetic.py) |
+|                  |                                                              |
+| :--------------- | :----------------------------------------------------------- |
+| Dataset          | Synthetic(Randomly generated)                                |
+| Keras            | v2.1.5                                                       |
+| TensorFlow       | v1.7.0                                                       |
+| MXNet            | v1.1.0                                                       |
+| CUDA             | v9.0.176                                                     |
+| Training Method  | [`fit`](https://keras.io/models/model/#fit)                  |
+| Training Scripts | [lstm_synthetic](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_synthetic.py) |
+
 
 ### Results
 
@@ -50,13 +53,15 @@
 
 ### Configuration
 
-| Data Set           | [Nietzsche]( https://s3.amazonaws.com/text-datasets/nietzsche.txt) |
-| ------------------ | ------------------------------------------------------------ |
-| Keras Version      | 2.1.5                                                        |
-| TensorFlow Version | 1.7.0                                                        |
-| MXNet Version      | 1.1.0                                                        |
-| Training Method    | [`fit`](https://keras.io/models/model/#fit)                  |
-| Training Scripts   | [lstm_text_generation](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_text_generation.pyy) |
+|                  |                                                              |
+| :--------------- | :----------------------------------------------------------- |
+| Dataset          | [Nietzsche]( https://s3.amazonaws.com/text-datasets/nietzsche.txt) |
+| Keras            | v2.1.5                                                       |
+| TensorFlow       | v1.7.0                                                       |
+| MXNet            | v1.1.0                                                       |
+| CUDA             | v9.0.176                                                     |
+| Training Method  | [`fit`](https://keras.io/models/model/#fit)                  |
+| Training Scripts | [lstm_text_generation](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_text_generation.pyy) |
 
 ### Results
 
@@ -96,13 +101,15 @@
 
 ### Configuration
 
-| Data Set           | [WikiText-2](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset) |
-| ------------------ | ------------------------------------------------------------ |
-| Keras Version      | 2.1.5                                                        |
-| TensorFlow Version | 1.7.0                                                        |
-| MXNet Version      | 1.1.0                                                        |
-| Training Method    | [`fit`](https://keras.io/models/model/#fit)                  |
-| Training Scripts   | [lstm_text_generation](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_text_generation.py) |
+|                  |                                                              |
+| :--------------- | :----------------------------------------------------------- |
+| Dataset          | [WikiText-2](https://einstein.ai/research/the-wikitext-long-term-dependency-language-modeling-dataset) |
+| Keras            | v2.1.5                                                       |
+| TensorFlow       | v1.7.0                                                       |
+| MXNet            | v1.1.0                                                       |
+| CUDA             | v9.0.176                                                     |
+| Training Method  | [`fit`](https://keras.io/models/model/#fit)                  |
+| Training Scripts | [lstm_text_generation](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_text_generation.py) |
 
 ### Results
 
