@@ -18,7 +18,7 @@ class LoggingMetrics:
 
     def __init__(self, history_callback, time_callback):
         self.num_iteration = None
-        self.parameter_list = []
+        self.metric_list = []
         self.pattern_list = []
         self.retrieve_metrics(history_callback, time_callback)
 
@@ -31,40 +31,40 @@ class LoggingMetrics:
                             '`keras.callbacks.Callback`')
 
         if hasattr(history_callback, 'epoch'):
-            self.parameter_list.append(history_callback.epoch)
+            self.metric_list.append(history_callback.epoch)
             self.pattern_list.append('[Epoch %d]\t')
 
         if hasattr(time_callback, 'times'):
-            self.parameter_list.append(time_callback.get_time())
-            self.parameter_list.append(time_callback.get_time_step())
-            self.parameter_list.append(time_callback.get_speed())
+            self.metric_list.append(time_callback.get_time())
+            self.metric_list.append(time_callback.get_time_step())
+            self.metric_list.append(time_callback.get_speed())
             self.pattern_list.append('time: %s\t')
             self.pattern_list.append('time_step: %s\t')
             self.pattern_list.append('speed: %s\t')
 
         if 'loss' in history_callback.history:
-            self.parameter_list.append(history_callback.history['loss'])
+            self.metric_list.append(history_callback.history['loss'])
             self.pattern_list.append('train_loss: %.4f\t')
 
         if 'acc' in history_callback.history:
-            self.parameter_list.append(history_callback.history['acc'])
+            self.metric_list.append(history_callback.history['acc'])
             self.pattern_list.append('train_acc: %.4f\t')
 
         if 'val_loss' in history_callback.history:
-            self.parameter_list.append(history_callback.history['val_loss'])
+            self.metric_list.append(history_callback.history['val_loss'])
             self.pattern_list.append('val_loss: %.4f\t')
 
         if 'val_acc' in history_callback.history:
-            self.parameter_list.append(history_callback.history['val_acc'])
+            self.metric_list.append(history_callback.history['val_acc'])
             self.pattern_list.append('val_acc: %.4f\t')
 
         self.num_iteration = history_callback.params['epochs']
 
     def get_metrics_index(self, idx):
-        idx_param_list = []
-        for param in self.parameter_list:
-            idx_param_list.append(param[idx])
-        return tuple(idx_param_list)
+        idx_metric_list = []
+        for metric in self.metric_list:
+            idx_metric_list.append(metric[idx])
+        return tuple(idx_metric_list)
 
     def save_metrics_to_log(self, logging):
         pattern_str = ''.join(self.pattern_list)
