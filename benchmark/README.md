@@ -94,13 +94,13 @@ Example Usage:
 
 We used benchmark scripts from [TensorFlow Benchmark](https://github.com/tensorflow/benchmarks/tree/keras-benchmarks/scripts/keras_benchmarks) official repo, and modified slightly for our use case.
 
-Put `lstm_synthetic` as models in `run_<backend-type>_backend.sh`
+Put `lstm_synthetic` as models parameter in `run_<backend-type>_backend.sh`
 
 ### Nietzsche Dataset
 
 We have used an official Keras LSTM example scripts [lstm_text_generation.py](https://github.com/keras-team/keras/blob/master/examples/lstm_text_generation.py), and modified slightly for our use case.
 
-Put `lstm_nietzsche` as models in `run_<backend-type>_backend.sh`
+Put `lstm_nietzsche` as models parameter in `run_<backend-type>_backend.sh`
 
 ### WikiText-2 Dataset
 
@@ -108,7 +108,7 @@ We have used an official WikiText-2 character level Dataset from this [link](htt
 
 The `lstm_text_generation.py` includes a dataset that is hosted on S3 bucket from this [link](https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-2-raw-v1.zip) (This is a WikiText-2 raw character level data).
 
-Put `lstm_wikitext2` as models in `run_<backend-type>_backend.sh`
+Put `lstm_wikitext2` as models parameter in `run_<backend-type>_backend.sh`
 
 ### RNN Benchmark Results
 
