@@ -1,5 +1,10 @@
 # Detailed RNN Benchmark Results
 
+Below is the result of GPU memory usage while running LSTM model on Synthetic, Nietzsche, and WikiText-2 character level dataset.
+
+![MemoryConsumption.png](MemoryConsumption.png)
+
+Note: All the data for performance diagram shown below is taken from the cell having `unroll Type=True`
 ## Synthetic Dataset
 
 ### Configuration
@@ -16,6 +21,11 @@
 
 
 ### Results
+
+|                                                          |                                                              |
+| :------------------------------------------------------- | :----------------------------------------------------------- |
+| ![lstm_Synthetic_32.png](lstm_Synthetic_32.png)          | ![lstm_Synthetic_128.png](lstm_Synthetic_128.png)            |
+
 
 | Instance    | GPUs | Backend    | Batch size | Data Set  | Training  Method | Speed/Epoch (Lower is better) | Unroll Type | No. of samples | Memory(MiB) |
 | ----------- | ---- | ---------- | ---------- | --------- | ---------------- | ----------------------------- | ----------- | -------------- | ----------- |
@@ -65,6 +75,11 @@
 
 ### Results
 
+|                                                          |                                                              |
+| :------------------------------------------------------- | :----------------------------------------------------------- |
+| ![lstm_Nietzsche_32.png](lstm_Nietzsche_32.png)          | ![lstm_Nietzsche_128.png](lstm_Nietzsche_128.png)            |
+
+
 | Instance    | GPUs | Backend    | Batch size | Data Set  | Training  Method | Speed/Epoch (Lower is better) | Unroll Type | No. of samples | Memory(MiB) |
 | ----------- | ---- | ---------- | ---------- | --------- | ---------------- | ----------------------------- | ----------- | -------------- | ----------- |
 | C5.18xLarge | 0    | MXNet      | 32         | Nietzsche | fit()            | 226s 1ms/step                 | TRUE        | 200285         | 0           |
@@ -112,6 +127,11 @@
 | Training Scripts | [lstm_text_generation](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/scripts/models/lstm_text_generation.py) |
 
 ### Results
+
+|                                                          |                                                              |
+| :------------------------------------------------------- | :----------------------------------------------------------- |
+| ![lstm_Wikitext2_32.png](lstm_Wikitext2_32.png)          | ![lstm_Wikitext2_128.png](lstm_Wikitext2_128.png)            |
+
 
 | Instance    | GPUs | Backend    | Batch size | Data Set   | Training  Method | Speed/Epoch (Lower is better) | Unroll Type | No. of samples | Memory(MiB) |
 | ----------- | ---- | ---------- | ---------- | ---------- | ---------------- | ----------------------------- | ----------- | -------------- | ----------- |
