@@ -145,7 +145,7 @@ For more detailed benchmark results, please refer to [RNN results.](benchmark_re
 
 #### 3. WikiText-2 Dataset
 
-![lstm_WikiText2_128.png](benchmark_result/lstm_WikiText2_128.png)
+![lstm_Wikitext2_128.png](benchmark_result/lstm_Wikitext2_128.png)
 
 | Instance    | GPUs | MXNet Backend<br />Speed/Epoch | TensorFlow Backend<br />Speed/Epoch |
 | :----------- | :---- | :------------------------------ | :----------------------------------- |
