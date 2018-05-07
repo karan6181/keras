@@ -38,7 +38,8 @@ class LstmBenchmark:
         self.epochs = 4
         self.num_samples = 50000
 
-    def run_benchmark(self, gpus=0, inference=False, use_dataset_tensors=False):
+    def run_benchmark(self, gpus=0, inference=False, use_dataset_tensors=False, epochs=20):
+        self.epochs = epochs
         print("Running model ", self.test_name)
         keras.backend.set_learning_phase(True)
 

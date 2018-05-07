@@ -47,6 +47,8 @@ parser.add_argument('--train_mode',
                     help='Required for imagenet: train_on_batch or fit_generator')
 parser.add_argument('--data_path',
                     help='Required for imagenet: path_to_imagenet_data')
+parser.add_argument('--epoch', default=200, type=int,
+                    help='Number of epoch')
 
 args = parser.parse_args()
 
@@ -80,7 +82,7 @@ else:
 
 # Training parameters
 batch_size = 32 * num_gpus if num_gpus > 0 else 32
-epochs = 200
+epochs = int(args.epoch)
 num_classes = 1000 if args.dataset == "imagenet" else 10
 data_format = K._image_data_format
 print('using image format:', data_format)

@@ -16,6 +16,6 @@ models='resnet50'
 dir=`pwd`
 for name in $models
 do
-  python $dir/run_benchmark.py --pwd=$dir --mode="$1" --model_name="$name" --dry_run=True --inference="$2"
+  python $dir/run_benchmark.py --pwd=$dir --mode="$1" --model_name="$name" --dry_run=True --inference="$2" --epochs="$3"
 done
 #!/usr/bin/env bash

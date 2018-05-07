@@ -31,7 +31,8 @@ class Resnet50Benchmark:
         self.num_samples = 1000
         self.test_type = 'tf.keras, eager_mode'
 
-    def run_benchmark(self, gpus=0, inference=False, use_dataset_tensors=False):
+    def run_benchmark(self, gpus=0, inference=False, use_dataset_tensors=False, epochs=20):
+        self.epochs = epochs
         print("Running model ", self.test_name)
         keras.backend.set_learning_phase(True)
 

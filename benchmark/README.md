@@ -19,11 +19,11 @@ We provide benchmark scripts to run on CIFAR-10, ImageNet and Synthetic Dataset(
 [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset has 60000 32x32 color images in 10 classes.
 The [training scripts](https://github.com/awslabs/keras-apache-mxnet/blob/master/benchmark/image-classification/benchmark_resnet.py)
  will automatically download the dataset, you need to provide dataset name, resnet version 
-(1 or 2), number of layers (20, 56, or 110), number of GPUs to use. 
+(1 or 2), number of layers (20, 56, or 110), number of GPUs to use, and number of epoch to use(optional, Default:200). 
 
 Example Usage:
 
-`python benchmark_resnet.py --dataset cifar10 --version 1 --layers 56 --gpus 4`
+`python benchmark_resnet.py --dataset cifar10 --version 1 --layers 56 --gpus 4 --epoch 20`
 
 
 ### ImageNet Dataset
@@ -42,7 +42,7 @@ Compare to CIFAR-10, you need to provide additional params: training mode and pa
 
 Example usage:
 
-`python benchmark_resnet.py --dataset imagenet --mxnet_backend_training_speed.pngversion 1 -layers 56 --gpus 4 --train_mode train_on_batch --data_path home/ubuntu/imagenet/train/`
+`python benchmark_resnet.py --dataset imagenet --mxnet_backend_training_speed.pngversion 1 -layers 56 --gpus 4 --epoch 20 --train_mode train_on_batch --data_path home/ubuntu/imagenet/train/`
 
 ### Synthetic Dataset
 We used benchmark scripts from 
@@ -50,11 +50,11 @@ We used benchmark scripts from
 official repo, and modified slightly for our use case.
 
 Directly run the shell script to launch the benchmark, provide one of the configurations in config.json and whether 
-you want to benchmark inference speed (True or False). 
+you want to benchmark inference speed (True or False), and number of epoch to use(optional, Default:200). 
 
 Example Usage:
 
-`sh run_<backend-type>_backend.sh gpu_config False`
+`sh run_<backend-type>_backend.sh gpu_config False 20`
 
 ### CNN Benchmark Results
 Here we list the result of MXNet backend training speed on CIFAR-10, ImageNet and Synthetic Data using 
@@ -84,11 +84,11 @@ Note: X-axis is number of GPUs used, Y-axis is training speed(images/second)
 
 We provide benchmark scripts to run on Synthetic(randomly generated), Nietzsche, and WikiText-2 character level Dataset.
 
-Directly run the shell script to launch the benchmark, provide one of the configurations in config.json and whether you want to benchmark inference speed (True or False). 
+Directly run the shell script to launch the benchmark, provide one of the configurations in config.json and whether you want to benchmark inference speed (True or False), and number of epoch to use(optional, Default:20). 
 
 Example Usage:
 
-`sh run_<backend-type>_backend.sh gpu_config False`
+`sh run_<backend-type>_backend.sh gpu_config False 20`
 
 ### Synthetic Dataset
 

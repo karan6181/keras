@@ -29,6 +29,8 @@ parser.add_argument('--dry_run', type=bool,
                          'uploading metrics to BigQuery. This is useful when '
                          'you are testing new models and do not want data '
                          'corruption.')
+parser.add_argument('--epochs',
+                    help='Number of epochs')
 
 args = parser.parse_args()
 
@@ -40,6 +42,11 @@ if args.inference:
 
     if args.inference == 'True':
         inference = True
+
+if args.epochs:
+    if not args.epochs.isdigit():
+        print('error: invalid int value: ', args.epochs)
+        sys.exit()
 
 # Load the json config file for the requested mode.
 config_file = open(args.pwd + "/config.json", 'r')
@@ -58,6 +65,9 @@ def get_backend_version():
 model = model_config.get_model_config(args.model_name)
 
 use_dataset_tensors = False
-model.run_benchmark(gpus=config['gpus'], inference=inference, use_dataset_tensors=use_dataset_tensors)
+if args.epochs:
+    model.run_benchmark(gpus=config['gpus'], inference=inference, use_dataset_tensors=use_dataset_tensors, epochs=int(args.epochs))
+else:
+    model.run_benchmark(gpus=config['gpus'], inference=inference, use_dataset_tensors=use_dataset_tensors)
 if args.dry_run:
     print("Model :total_time", model.test_name, model.total_time)
