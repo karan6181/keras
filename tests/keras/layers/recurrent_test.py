@@ -236,10 +236,6 @@ def test_trainability(layer_class):
     assert len(layer.non_trainable_weights) == 0
 
 
-@pytest.mark.skipif(K.backend() == 'mxnet',
-                    reason='MXNet backend has an issue with Masking layer'
-                           'Tracking with this issue:'
-                           'https://github.com/awslabs/keras-apache-mxnet/issues/228')
 def test_masking_layer():
     ''' This test based on a previously failing issue here:
     https://github.com/keras-team/keras/issues/1567
@@ -247,12 +243,15 @@ def test_masking_layer():
     inputs = np.random.random((6, 3, 4))
     targets = np.abs(np.random.random((6, 3, 5)))
     targets /= targets.sum(axis=-1, keepdims=True)
-
-    model = Sequential()
-    model.add(Masking(input_shape=(3, 4)))
-    model.add(recurrent.SimpleRNN(units=5, return_sequences=True, unroll=False))
-    model.compile(loss='categorical_crossentropy', optimizer='adam')
-    model.fit(inputs, targets, epochs=1, batch_size=100, verbose=1)
+    if K.backend() != 'mxnet':
+        # MXNet backend has an issue with Masking layer
+        # Tracking with this issue:
+        # https://github.com/awslabs/keras-apache-mxnet/issues/228
+        model = Sequential()
+        model.add(Masking(input_shape=(3, 4)))
+        model.add(recurrent.SimpleRNN(units=5, return_sequences=True, unroll=False))
+        model.compile(loss='categorical_crossentropy', optimizer='adam')
+        model.fit(inputs, targets, epochs=1, batch_size=100, verbose=1)
 
     model = Sequential()
     model.add(Masking(input_shape=(3, 4)))
