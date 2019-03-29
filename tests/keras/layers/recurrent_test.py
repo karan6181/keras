@@ -146,6 +146,10 @@ def test_statefulness(layer_class):
 
 
 @rnn_test
+@pytest.mark.skipif(K.backend() == 'mxnet',
+                    reason='MXNet backend has an issue with Masking layer'
+                           'Tracking with this issue:'
+                           'https://github.com/awslabs/keras-apache-mxnet/issues/228')
 def test_masking_correctness(layer_class):
     # Check masking: output with left padding and right padding
     # should be the same.
@@ -232,6 +236,10 @@ def test_trainability(layer_class):
     assert len(layer.non_trainable_weights) == 0
 
 
+@pytest.mark.skipif(K.backend() == 'mxnet',
+                    reason='MXNet backend has an issue with Masking layer'
+                           'Tracking with this issue:'
+                           'https://github.com/awslabs/keras-apache-mxnet/issues/228')
 def test_masking_layer():
     ''' This test based on a previously failing issue here:
     https://github.com/keras-team/keras/issues/1567
