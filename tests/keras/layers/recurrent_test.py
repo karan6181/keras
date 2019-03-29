@@ -147,7 +147,8 @@ def test_statefulness(layer_class):
 
 @rnn_test
 @pytest.mark.skipif(K.backend() == 'mxnet',
-                    reason='MXNet backend has an issue with Masking layer'
+                    reason='MXNet backend has an issue with Masking layer with `unroll=False`'
+                           'in RNN/LSTM/GRU layer.'
                            'Tracking with this issue:'
                            'https://github.com/awslabs/keras-apache-mxnet/issues/228')
 def test_masking_correctness(layer_class):
@@ -244,7 +245,8 @@ def test_masking_layer():
     targets = np.abs(np.random.random((6, 3, 5)))
     targets /= targets.sum(axis=-1, keepdims=True)
     if K.backend() != 'mxnet':
-        # MXNet backend has an issue with Masking layer
+        # MXNet backend has an issue with Masking layer with `unroll=False`
+        # in RNN/LSTM/GRU layer.
         # Tracking with this issue:
         # https://github.com/awslabs/keras-apache-mxnet/issues/228
         model = Sequential()
