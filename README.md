@@ -1,4 +1,6 @@
-﻿# Keras: Deep Learning for humans
+﻿## NOTE: MXNet support in Keras is going to be discontinued and v2.2.4.3 is the last release as [multi-backend](https://github.com/keras-team/keras#multi-backend-keras-and-tfkeras) Keras has been discontinued . It is recommended to consider switching to [MXNet Gluon](https://mxnet.apache.org/api/python/docs/tutorials/packages/gluon/index.html). MXNet Gluon is a high level, easy to use and performant deep learning framework that has all the features in Keras-MXNet and more.
+
+# Keras: Deep Learning for humans
 
 ![Keras logo](https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png)
 
