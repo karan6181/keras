@@ -24,6 +24,7 @@ from .models import Model
 from .models import Sequential
 
 import warnings
+warnings.simplefilter('always', DeprecationWarning)
 warnings.warn("MXNet support in Keras is going to be discontinued and v2.2.4.3 is the last "
               "release as multi-backend Keras has been discontinued . It is recommended to "
               "consider switching to MXNet Gluon. More information can be found here: "
